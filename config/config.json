@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "mana1628",
+    "auth": "filmate",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "auth": "auth_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "auth": "auth_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
