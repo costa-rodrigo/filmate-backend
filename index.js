@@ -43,19 +43,25 @@ app.post('/login', async (req, res) => {
 
     if (name && password) {
         let user = await auth.getUser({ name })
+       
 
         if (!user) {
-            res.status(401).json({ message: "User not found ", user: name })
+            // res.status(401).json({ message: "User not found ", user: name })
+            console.log('no user!!')
+            
+        }
+        else if (user && user.password !== password) {
+            // res.status(401).json({ message: 'Password is incorrect!' })
+            console.log('user exists but wrong password')
         }
 
-        if (user.password === password) {
+        else {
             let payload = { id: user.id }
             let token = authentication.jwt.sign(payload, authentication.jwtOptions.secretOrKey)
-            res.json({ message: 'ok', token: token })
+            res.status(200).json({ message: 'ok', token: token })
+            console.log('user password if satement')
         }
-        else {
-            res.status(401).json({ message: 'Password is incorrect!' })
-        }
+      
     }
 })
 
