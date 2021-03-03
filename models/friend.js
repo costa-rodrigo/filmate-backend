@@ -1,6 +1,6 @@
 module.exports = (sequelize, Datatype) => {
 
-    const User = sequelize.define('user', {
+    const friend = sequelize.define('friend', {
 
         id: {
             primaryKey: true,
@@ -9,34 +9,34 @@ module.exports = (sequelize, Datatype) => {
             allowNull: false
         },
 
-        name: {
-            type: Datatype.STRING,
-            notEmpty: true,
+        user_id: {
+            type: Datatype.INTEGER,
             allowNull: false
         },
 
-        email: {
-            type: Datatype.STRING,
-            notEmpty: true,
+        friend_id: {
+            type: Datatype.INTEGER,
             allowNull: false
         },
 
-        password: {
+        friend_name: {
             type: Datatype.STRING,
-            notEmpty: true,
             allowNull: false
         }
+
     },
         {
-            freezeTableName: true, // Model tableName will be the same as the model name
+            freezeTableName: true, // tableName will be the same as the model name
             timestamps: false,
             underscored: true
         });
 
-    // User.associate = models => {
-    //     User.hasMany(models.friend);
+    // friend.associate = models => {
+    //     friend.belongsTo(models.user, {
+    //         foreignKey: 'user_id'
+    //     });
     // }
 
-
-    return User;
+    return friend;
 }
+
