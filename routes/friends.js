@@ -8,7 +8,6 @@ const jwt_decode = require('jwt-decode');
 
 const models = require("../models");
 const { Op } = require("sequelize");
-const Quiz = models.quiz;
 const User = models.user;
 const User_Friend = models.friend;
 
@@ -31,6 +30,7 @@ router
                 { user_id: userId },
         })
             .then((result) => {
+                console.log(result)
                 res.send(result)
             })
     })
