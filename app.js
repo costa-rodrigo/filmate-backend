@@ -25,7 +25,7 @@ const apiKey = process.env.API_KEY;
 let genreId = '28';
 
 // initializing default mood
-let mood = '';
+let moodName = '';
 
 // base url to retrieve the movies
 let url= `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreId}&with_watch_providers=8&watch_region=CA`
@@ -108,24 +108,23 @@ app.post('/movies', (req,res)=>{
 
 // get movies by mood endpoint
 app.post('/mood', (req,res)=>{
-    mood = req.body;
+    moodName = req.body;
 
-    if (mood === 'happy') {
+    if (moodName == 'happy') {
         genreId = '35|14'
-    } else if (mood === 'dateNight') {
+    } else if (moodName == 'dateNight') {
         genreId = '18|10749'
-    } else if (mood === 'adrenalineRush') {
+    } else if (moodName == 'adrenalineRush') {
         genreId = '28|12'
-    } else if (mood === 'artsy') {
+    } else if (moodName == 'artsy') {
         genreId = '10402'
-    } else if (mood === 'hiTech') {
+    } else if (moodName == 'hiTech') {
         genreId = '878'
-    } else if (mood === 'inspiring') {
+    } else if (moodName == 'inspiring') {
         genreId = '18|10752'
-    }
-    else if (mood === 'forTheKids') {
+    } else if (moodName == 'forTheKids') {
         genreId = '10751'
-    } else if (mood === 'curiousMysteries') {
+    } else if (moodName == 'curiousMysteries') {
         genreId = '53|80'
     }
 
