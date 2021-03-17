@@ -30,7 +30,6 @@ router
                 { user_id: userId },
         })
             .then((result) => {
-                console.log(result)
                 res.send(result)
             })
     })
@@ -52,40 +51,41 @@ router
                 where: { email: friend_email }
             })
             .then((result) => {
-                let friendId = result[0].dataValues.id;
-                let friendName = result[0].dataValues.name;
+                if (result.length > 0) {
+                    let friendId = result[0].dataValues.id;
+                    let friendName = result[0].dataValues.name;
 
-                console.log("user id " + userId)
-                console.log("friend id " + friendId)
-                console.log("friend name " + friendName)
-
-
-
-                User_Friend.findAll({
-                    where: {
-                        [Op.and]: [
-                            { user_id: userId },
-                            { friend_id: friendId },
-                        ]
-                    }
-                })
-                    .then((result) => {
-
-                        if (result.length < 1) {
-                            User_Friend.create({
-                                user_id: userId,
-                                friend_id: friendId,
-                                friend_name: friendName,
-                            })
-                            return
+                    User_Friend.findAll({
+                        where: {
+                            [Op.and]: [
+                                { user_id: userId },
+                                { friend_id: friendId },
+                            ]
                         }
                     })
-                    .catch((error) => {
-                        res.status(500).send(`An error occurred: ${error.message}`);
-                        process.exit();
-                    })
-            })
+                        .then((result) => {
 
+                            if (result.length < 1) {
+                                User_Friend.create({
+                                    user_id: userId,
+                                    friend_id: friendId,
+                                    friend_name: friendName,
+                                    friend_email: friend_email,
+                                })
+                                console.log("Friend Added")
+                                return
+                            }
+                        })
+                        .catch((error) => {
+                            res.status(500).send(`An error occurred: ${error.message}`);
+                            process.exit();
+                        })
+                }
+                else {
+                    console.log("Invalid email address.")
+                }
+
+            })
         res.send()
     })
 

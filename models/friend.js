@@ -22,6 +22,11 @@ module.exports = (sequelize, Datatype) => {
         friend_name: {
             type: Datatype.STRING,
             allowNull: false
+        },
+        friend_email: {
+            type: Datatype.STRING,
+            notEmpty: true,
+            allowNull: false
         }
 
     },
