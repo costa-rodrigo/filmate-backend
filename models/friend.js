@@ -36,12 +36,6 @@ module.exports = (sequelize, Datatype) => {
             underscored: true
         });
 
-    // friend.associate = models => {
-    //     friend.belongsTo(models.user, {
-    //         foreignKey: 'user_id'
-    //     });
-    // }
-
     return friend;
 }
 
