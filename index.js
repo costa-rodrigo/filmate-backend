@@ -10,9 +10,11 @@ const models = require("./models");
 // Routes
 const registerRoute = require('./routes/register');
 const loginRoute = require('./routes/login');
+const userRoute = require('./routes/user');
 const listFriends = require('./routes/friends');
 const groupRoute = require('./routes/groups');
 const updateGroupRoute = require('./routes/updateGroup');
+const groupMembersRoute = require('./routes/groupMembers');
 
 // Express PORT
 const PORT = process.env.PORT || 3000;
@@ -28,9 +30,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //Routes API
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
+app.use('/user', userRoute);
 app.use('/friends', listFriends)
 app.use('/groups', groupRoute)
 app.use('/groups-update', updateGroupRoute)
+app.use('/group', groupMembersRoute)
 
 // Baisc Routes
 app.get('/', (req, res) => {

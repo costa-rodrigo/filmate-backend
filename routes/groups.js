@@ -68,7 +68,10 @@ router
 
         User_Group
             .findAll({
-                include: ['user'],
+                include: [
+                    models.user,
+                    models.group
+                ],
                 where: { user_id: userId }
             })
             .then((group) => {
