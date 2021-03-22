@@ -15,6 +15,8 @@ const listFriends = require('./routes/friends');
 const groupRoute = require('./routes/groups');
 const updateGroupRoute = require('./routes/updateGroup');
 const groupMembersRoute = require('./routes/groupMembers');
+const startSwapRoute = require('./routes/swap');
+const startVoteRoute = require('./routes/vote');
 
 // Express PORT
 const PORT = process.env.PORT || 3000;
@@ -35,6 +37,8 @@ app.use('/friends', listFriends)
 app.use('/groups', groupRoute)
 app.use('/groups-update', updateGroupRoute)
 app.use('/group', groupMembersRoute)
+app.use('/swap', startSwapRoute)
+app.use('/vote', startVoteRoute)
 
 // Baisc Routes
 app.get('/', (req, res) => {
