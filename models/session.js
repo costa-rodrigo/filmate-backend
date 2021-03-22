@@ -8,6 +8,11 @@ module.exports = (sequelize, Datatype) => {
             type: Datatype.INTEGER,
             allowNull: false
         },
+        isClosed: {
+            type: Datatype.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        }
     },
         {
             freezeTableName: true, // tableName will be the same as the model name

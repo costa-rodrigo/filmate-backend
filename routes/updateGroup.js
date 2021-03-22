@@ -54,12 +54,17 @@ router
                         if (data.user_id) {
                             User_Group
                                 .findAll({
-                                    where: { user_id: data.user_id }
+                                    where: {
+                                        [Op.and]: [
+                                            { user_id: data.user_id },
+                                            { group_id: data.group_id },
+                                        ]
+                                    }
                                 })
                                 .then((result) => {
                                     // If yes, return a message to the user
                                     if (result.length > 0) {
-                                        console.log("this user is already part of this group")
+                                        return res.status(200).send("this user is already part of this group")
                                     }
                                     else {
                                         User_Group
@@ -68,7 +73,7 @@ router
                                                 group_id: data.group_id
                                             })
 
-                                        console.log("User added to the group.")
+                                        return res.status(200).send("User added to the group.")
                                     }
                                 })
                         }
@@ -78,7 +83,6 @@ router
                 console.log(error.message)
                 process.exit();
             })
-        res.send()
     })
 
     .get('/', (req, res) => {
