@@ -17,7 +17,7 @@ exports.use = () => {
 
     let strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
         let user = auth.getUser({ id: jwt_payload.id })
-
+        console.log(jwt_payload)
         if (user) {
             next(null, user);
         } else {

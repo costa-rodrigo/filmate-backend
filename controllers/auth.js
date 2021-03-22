@@ -2,17 +2,17 @@ const models = require("../models");
 const User = models.user;
 
 
-exports.createUser = async ({ name, password }) => {
+exports.createUser = async ({ name, password, email }) => {
     User
         .findOne({
             where: {
-                name: name
+                email: email
             }
         })
         .then((user) => {
             // If there is already a user with that username, returns a massage. 
             if (user) {
-                console.log('That username is already taken.')
+                console.log('That email is already taken.')
             }
             // If not, creates a new user.
             else {
@@ -22,7 +22,8 @@ exports.createUser = async ({ name, password }) => {
                 // const userPassword = generateHash(password);
                 const data = {
                     name: name,
-                    password: password
+                    password: password,
+                    email: email
                 };
 
                 User

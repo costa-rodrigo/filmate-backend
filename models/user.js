@@ -15,6 +15,12 @@ module.exports = (sequelize, Datatype) => {
             allowNull: false
         },
 
+        email: {
+            type: Datatype.STRING,
+            notEmpty: true,
+            allowNull: false
+        },
+
         password: {
             type: Datatype.STRING,
             notEmpty: true,
@@ -26,6 +32,16 @@ module.exports = (sequelize, Datatype) => {
             timestamps: false,
             underscored: true
         });
+
+    User.associate = models => {
+        User.belongsToMany(models.group, {
+            foreignKey: 'group_id',
+            through: 'user_has_group',
+            as: 'group'
+        });
+
+        User.hasMany(models.vote);
+    }
 
     return User;
 }
