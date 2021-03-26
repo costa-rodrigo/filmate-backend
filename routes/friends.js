@@ -12,8 +12,6 @@ const User = models.user;
 const User_Friend = models.friend;
 
 
-
-
 router
     .get('/', (req, res) => {
 
@@ -44,48 +42,69 @@ router
         let decoded = jwt_decode(token);
 
         let userId = decoded.id;
+        let userName;
+        let userEmail;
         let friend_email = req.body.email
 
         User
             .findAll({
-                where: { email: friend_email }
+                where: { id: userId }
             })
-            .then((result) => {
-                if (result.length > 0) {
-                    let friendId = result[0].dataValues.id;
-                    let friendName = result[0].dataValues.name;
+            .then((user) => {
+                userName = user[0].dataValues.name
+                userEmail = user[0].dataValues.email
+                User
+                    .findAll({
+                        where: { email: friend_email }
+                    })
+                    .then((result) => {
+                        if (result.length > 0) {
+                            let friendId = result[0].dataValues.id;
+                            let friendName = result[0].dataValues.name;
 
-                    User_Friend.findAll({
-                        where: {
-                            [Op.and]: [
-                                { user_id: userId },
-                                { friend_id: friendId },
-                            ]
+                            User_Friend.findAll({
+                                where: {
+                                    [Op.and]: [
+                                        { user_id: userId },
+                                        { friend_id: friendId },
+                                    ]
+                                }
+                            })
+                                .then((result) => {
+                                    if (result.length < 1) {
+                                        User_Friend
+                                            .create({
+                                                user_id: userId,
+                                                friend_id: friendId,
+                                                friend_name: friendName,
+                                                friend_email: friend_email,
+                                            })
+
+                                        User_Friend
+                                            .create({
+                                                user_id: friendId,
+                                                friend_id: userId,
+                                                friend_name: userName,
+                                                friend_email: userEmail,
+                                            })
+
+                                        console.log("Friend Added")
+                                        return
+                                    }
+                                })
+                                .catch((error) => {
+                                    res.status(500).send(`An error occurred: ${error.message}`);
+                                    process.exit();
+                                })
+                        }
+                        else {
+                            console.log("Invalid email address.")
                         }
                     })
-                        .then((result) => {
-
-                            if (result.length < 1) {
-                                User_Friend.create({
-                                    user_id: userId,
-                                    friend_id: friendId,
-                                    friend_name: friendName,
-                                    friend_email: friend_email,
-                                })
-                                console.log("Friend Added")
-                                return
-                            }
-                        })
-                        .catch((error) => {
-                            res.status(500).send(`An error occurred: ${error.message}`);
-                            process.exit();
-                        })
-                }
-                else {
-                    console.log("Invalid email address.")
-                }
-
             })
+
+
+
         res.send()
     })
 

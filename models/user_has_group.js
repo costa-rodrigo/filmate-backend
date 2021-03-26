@@ -1,6 +1,12 @@
 module.exports = (sequelize, Datatype) => {
 
-    const user_has_group = sequelize.define('user_has_group', {},
+    const user_has_group = sequelize.define('user_has_group', {
+        is_owner: {
+            type: Datatype.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        }
+    },
         {
             freezeTableName: true, // tableName will be the same as the model name
             timestamps: false,

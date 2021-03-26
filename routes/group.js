@@ -36,16 +36,17 @@ router
                         .then((group) => {
                             User_Group
                                 .create({
+                                    is_owner: true,
                                     user_id: userId,
-                                    group_id: group.id
+                                    group_id: group.id,
                                 })
                         })
 
-                    console.log("Group created!")
+                    res.status(201).send("Group created!")
                     return
                 }
                 else {
-                    console.log("This group name is already taken.")
+                    return res.status(200).send("This group name is already taken.")
                 }
             })
             .catch((error) => {
@@ -54,7 +55,7 @@ router
                 process.exit();
             })
 
-        res.send()
+
     })
 
     .get('/', (req, res) => {
@@ -69,7 +70,6 @@ router
         User_Group
             .findAll({
                 include: [
-                    models.user,
                     models.group
                 ],
                 where: { user_id: userId }

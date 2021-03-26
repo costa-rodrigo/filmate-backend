@@ -22,43 +22,71 @@ router
         let decoded = jwt_decode(token);
 
         let userId = decoded.id;
-        let sessionId = req.body.session_id
+        let groupId = req.body.group_id
         let votes = req.body.votes
+        let sessionId;
 
-        Vote.
-            findAll({
-                where: {
-                    [Op.and]: [
-                        { user_id: userId },
-                        { session_id: sessionId },
-                    ]
-                }
+
+        Session
+            .findAll({
+                where: { group_id: groupId }
             })
             .then((result) => {
-                if (result.length < 1) {
-                    Vote.
-                        create({
-                            user_id: userId,
-                            session_id: sessionId,
-                            vote_1: votes[0],
-                            vote_2: votes[1],
-                            vote_3: votes[2],
-                            vote_4: votes[3],
-                            vote_5: votes[4],
-                            vote_6: votes[5],
-                            vote_7: votes[6],
-                            vote_8: votes[7],
-                            vote_9: votes[8],
-                            vote_10: votes[9]
-                        })
+                sessionId = result[result.length - 1].dataValues.id;
+            })
+            .then(() => {
+                Vote.
+                    findAll({
+                        where: {
+                            [Op.and]: [
+                                { user_id: userId },
+                                { session_id: sessionId },
+                            ]
+                        }
+                    })
+                    .then((result) => {
+                        if (result.length < 1) {
+                            Vote.
+                                create({
+                                    user_id: userId,
+                                    session_id: sessionId,
+                                    vote_1: votes[0],
+                                    vote_2: votes[1],
+                                    vote_3: votes[2],
+                                    vote_4: votes[3],
+                                    vote_5: votes[4],
+                                    vote_6: votes[5],
+                                    vote_7: votes[6],
+                                    vote_8: votes[7],
+                                    vote_9: votes[8],
+                                    vote_10: votes[9]
+                                })
 
-                    res.status(201).send("User has voted successfully")
-                    return
-                }
-                else {
-                    res.status(200).send("User has already voted")
-                    return
-                }
+                            res.status(201).send("User has voted successfully")
+                            return
+                        }
+                        else {
+                            res.status(200).send("User has already voted")
+                            return
+                        }
+                    })
+            })
+            .catch((error) => {
+                res.status(500).send(`An error occurred: ${error.message}`);
+                process.exit();
+            })
+    })
+
+    .get('/', (req, res) => {
+
+        let groupId = req.body.group_id
+
+        Session
+            .findAll({
+                where: { group_id: groupId }
+            })
+            .then((result) => {
+                res.status(201).send(result[result.length - 1].dataValues);
             })
             .catch((error) => {
                 res.status(500).send(`An error occurred: ${error.message}`);
