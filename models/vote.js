@@ -3,59 +3,59 @@ module.exports = (sequelize, Datatype) => {
     const vote = sequelize.define('vote', {
 
         vote_1: {
-            type: Datatype.BOOLEAN,
-            allowNull: false
+            type: Datatype.INTEGER,
+            allowNull: true,
         },
 
         vote_2: {
-            type: Datatype.BOOLEAN,
-            allowNull: false
+            type: Datatype.INTEGER,
+            allowNull: true
         },
 
         vote_3: {
-            type: Datatype.BOOLEAN,
-            allowNull: false
+            type: Datatype.INTEGER,
+            allowNull: true
         },
 
         vote_4: {
-            type: Datatype.BOOLEAN,
-            allowNull: false
+            type: Datatype.INTEGER,
+            allowNull: true
         },
 
         vote_5: {
-            type: Datatype.BOOLEAN,
-            allowNull: false
+            type: Datatype.INTEGER,
+            allowNull: true
         },
 
         vote_6: {
-            type: Datatype.BOOLEAN,
-            allowNull: false
+            type: Datatype.INTEGER,
+            allowNull: true
         },
 
         vote_7: {
-            type: Datatype.BOOLEAN,
-            allowNull: false
+            type: Datatype.INTEGER,
+            allowNull: true
         },
 
         vote_8: {
-            type: Datatype.BOOLEAN,
-            allowNull: false
+            type: Datatype.INTEGER,
+            allowNull: true
         },
 
         vote_9: {
-            type: Datatype.BOOLEAN,
-            allowNull: false
+            type: Datatype.INTEGER,
+            allowNull: true
         },
 
         vote_10: {
-            type: Datatype.BOOLEAN,
-            allowNull: false
+            type: Datatype.INTEGER,
+            allowNull: true
         },
 
     },
         {
             freezeTableName: true, // tableName will be the same as the model name
-            timestamps: false,
+            timestamps: true,
             underscored: true
         });
 

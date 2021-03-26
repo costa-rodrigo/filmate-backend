@@ -64,7 +64,7 @@ router
                 where: { group_id: groupId }
             })
             .then((result) => {
-                res.status(201).send(send);
+                res.status(201).send(result);
             })
             .catch((error) => {
                 res.status(500).send(`An error occurred: ${error.message}`);
