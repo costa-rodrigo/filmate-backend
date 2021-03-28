@@ -13,7 +13,7 @@ const Group = models.group;
 const User_Group = models.user_has_group;
 
 router
-    .get('/', (req, res) => {
+    .post('/', (req, res) => {
         let groupId = req.body.group_id;
 
         User_Group

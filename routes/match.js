@@ -55,7 +55,7 @@ router
                             })
                             .then((votes) => {
                                 if (votes.length < members) {
-                                    res.send("espera carai!")
+                                    res.status(201).send("espera carai!")
                                 }
 
                                 else {

@@ -3,52 +3,52 @@ module.exports = (sequelize, Datatype) => {
     const vote = sequelize.define('vote', {
 
         vote_1: {
-            type: Datatype.INTEGER,
+            type: Datatype.STRING,
             allowNull: true,
         },
 
         vote_2: {
-            type: Datatype.INTEGER,
+            type: Datatype.STRING,
             allowNull: true
         },
 
         vote_3: {
-            type: Datatype.INTEGER,
+            type: Datatype.STRING,
             allowNull: true
         },
 
         vote_4: {
-            type: Datatype.INTEGER,
+            type: Datatype.STRING,
             allowNull: true
         },
 
         vote_5: {
-            type: Datatype.INTEGER,
+            type: Datatype.STRING,
             allowNull: true
         },
 
         vote_6: {
-            type: Datatype.INTEGER,
+            type: Datatype.STRING,
             allowNull: true
         },
 
         vote_7: {
-            type: Datatype.INTEGER,
+            type: Datatype.STRING,
             allowNull: true
         },
 
         vote_8: {
-            type: Datatype.INTEGER,
+            type: Datatype.STRING,
             allowNull: true
         },
 
         vote_9: {
-            type: Datatype.INTEGER,
+            type: Datatype.STRING,
             allowNull: true
         },
 
         vote_10: {
-            type: Datatype.INTEGER,
+            type: Datatype.STRING,
             allowNull: true
         },
 
